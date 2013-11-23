@@ -1,5 +1,5 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using System;
 using System.Diagnostics;
 
 namespace Benchmark.System
@@ -8,213 +8,147 @@ namespace Benchmark.System
     [TestFixture]
     public class PrimitivesTests
     {
-        const int iterations = 1000000;
+        const int iterations = 10000000;
 
         [Test]
         public void Int16_Addition()
         {
-            var num = (short)new Random().Next(1);
+            var num = (short)0;
 
             var stopwatch = Stopwatch.StartNew();
             for (var i = 0; i < iterations; i++)
             {
                 num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
             }
-
             stopwatch.StopAndLog(iterations);
+
+            if (num == 0) NeverCalled();
         }
 
         [Test]
         public void Int16_Multiplication()
         {
-            var num = (short)new Random().Next(1);
+            var num = (short)0;
 
             var stopwatch = Stopwatch.StartNew();
             for (var i = 0; i < iterations; i++)
             {
                 num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
             }
-
             stopwatch.StopAndLog(iterations);
+
+            if (num == 0) NeverCalled();
         }
 
         [Test]
         public void Int16_Division()
         {
-            var num = (short)new Random().Next(1);
+            var num = (short)0;
 
             var stopwatch = Stopwatch.StartNew();
             for (var i = 0; i < iterations; i++)
             {
                 num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
             }
-
             stopwatch.StopAndLog(iterations);
+
+            if (num == 0) NeverCalled();
         }
 
         [Test]
         public void Int32_Addition()
         {
-            var num = new Random().Next(1);
+            var num = 0;
 
             var stopwatch = Stopwatch.StartNew();
             for (var i = 0; i < iterations; i++)
             {
                 num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
             }
-
             stopwatch.StopAndLog(iterations);
+
+            if (num == 0) NeverCalled();
         }
 
         [Test]
         public void Int32_Multiplication()
         {
-            var num = new Random().Next(1);
+            var num = 0;
 
             var stopwatch = Stopwatch.StartNew();
             for (var i = 0; i < iterations; i++)
             {
                 num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
             }
-
             stopwatch.StopAndLog(iterations);
+
+            if (num == 0) NeverCalled();
         }
 
         [Test]
         public void Int32_Division()
         {
-            var num = new Random().Next(1);
+            var num = 0;
 
             var stopwatch = Stopwatch.StartNew();
             for (var i = 0; i < iterations; i++)
             {
                 num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
             }
 
             stopwatch.StopAndLog(iterations);
+
+            if (num == 0) NeverCalled();
         }
 
         [Test]
         public void Int64_Addition()
         {
-            long num = new Random().Next(1);
+            long num = 0;
 
             var stopwatch = Stopwatch.StartNew();
             for (var i = 0; i < iterations; i++)
             {
                 num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
-                num += 1;
             }
-
             stopwatch.StopAndLog(iterations);
+
+            if (num == 0) NeverCalled();
         }
 
         [Test]
         public void Int64_Multiplication()
         {
-            long num = new Random().Next(1);
+            long num = 0;
 
             var stopwatch = Stopwatch.StartNew();
             for (var i = 0; i < iterations; i++)
             {
                 num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
             }
-
             stopwatch.StopAndLog(iterations);
+
+            if (num == 0) NeverCalled();
         }
 
         [Test]
         public void Int64_Division()
         {
-            long num = new Random().Next(1);
+            long num = 0;
 
             var stopwatch = Stopwatch.StartNew();
             for (var i = 0; i < iterations; i++)
             {
                 num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
-                num *= 3;
             }
-
             stopwatch.StopAndLog(iterations);
+
+            if (num == 0) NeverCalled();
+        }
+
+        private static void NeverCalled()
+        {
+            Console.WriteLine("Force optimization to ignore loop content");
         }
     }
     // ReSharper restore InconsistentNaming
