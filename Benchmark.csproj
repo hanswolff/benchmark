@@ -50,6 +50,7 @@
     <Compile Include="System.Collections\LinkedListTests.cs" />
     <Compile Include="System.Collections\ListTests.cs" />
     <Compile Include="System.IO\BinaryReaderTests.cs" />
+    <Compile Include="System.IO\MemoryMappedFilesTests.cs" />
     <Compile Include="System.Linq\LinqTests.cs" />
     <Compile Include="System.Linq\ParallelTests.cs" />
     <Compile Include="System.Threading\ThreadTest.cs" />
