@@ -53,8 +53,9 @@
     <Compile Include="System.IO\MemoryMappedFilesTests.cs" />
     <Compile Include="System.Linq\LinqTests.cs" />
     <Compile Include="System.Linq\ParallelTests.cs" />
-    <Compile Include="System.Threading\ThreadTest.cs" />
-    <Compile Include="System.Threading\TaskTest.cs" />
+    <Compile Include="System.Threading\MutexTests.cs" />
+    <Compile Include="System.Threading\ThreadTests.cs" />
+    <Compile Include="System.Threading\TaskTests.cs" />
     <Compile Include="System\ConvertTests.cs" />
     <Compile Include="System\BitConverterTests.cs" />
     <Compile Include="System\PrimitivesTests.cs" />

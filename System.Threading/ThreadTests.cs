@@ -4,24 +4,22 @@ using System.Threading;
 
 namespace Benchmark.System.Threading
 {
-    // ReSharper disable InconsistentNaming
     [TestFixture]
-    public class ThreadTest
+    public class ThreadTests
     {
-        const int iterations = 1000;
+        const int Iterations = 1000;
 
         [Test]
         public void Thread_Start_Join()
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 var thread = new Thread(() => { });
                 thread.Start();
                 thread.Join();
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
     }
-    // ReSharper restore InconsistentNaming
 }
