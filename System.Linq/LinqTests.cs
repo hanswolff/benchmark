@@ -1,64 +1,62 @@
-﻿using System.Diagnostics;
+﻿using NUnit.Framework;
+using System.Diagnostics;
 using System.Linq;
-using NUnit.Framework;
 
-namespace Benchmark.System.Collections
+namespace Benchmark.System.Linq
 {
-    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class LinqTests
     {
-        const int singleCount = 2000000;
-        const int iterations = 2000000;
+        const int SingleCount = 2000000;
+        const int Iterations = 2000000;
 
         [Test]
         public void Any()
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
-                Enumerable.Range(0, singleCount).Any();
+                Enumerable.Range(0, SingleCount).Any();
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
         public void Single_ToArray()
         {
             var stopwatch = Stopwatch.StartNew();
-            Enumerable.Range(0, singleCount).Select(x => 0L).ToArray();
-            stopwatch.StopAndLog(singleCount);
+            Enumerable.Range(0, SingleCount).Select(x => 0L).ToArray();
+            stopwatch.StopAndLog(SingleCount);
         }
 
         [Test]
         public void Single_ToList()
         {
             var stopwatch = Stopwatch.StartNew();
-            Enumerable.Range(0, singleCount).Select(x => 0L).ToList();
-            stopwatch.StopAndLog(singleCount);
+            Enumerable.Range(0, SingleCount).Select(x => 0L).ToList();
+            stopwatch.StopAndLog(SingleCount);
         }
 
         [Test]
         public void Multiple_ToArray()
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 Enumerable.Range(0, 1).Select(x => 0L).ToArray();
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
         public void Multiple_ToList()
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 Enumerable.Range(0, 1).Select(x => 0L).ToList();
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
     }
-    // ReSharper restore InconsistentNaming
 }

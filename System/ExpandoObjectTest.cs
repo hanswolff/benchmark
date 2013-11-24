@@ -5,22 +5,21 @@ using System.Dynamic;
 
 namespace Benchmark.System
 {
-    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class ExpandoObjectTests
     {
-        const int iterations = 1000000;
+        const int Iterations = 1000000;
 
         [Test]
         public void SetProperty_ExpandoString_Blank()
         {
             dynamic expandoObject = new ExpandoObject();
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 expandoObject.StringProperty = "";
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
@@ -30,11 +29,11 @@ namespace Benchmark.System
             expandoObject.StringProperty = "";
 
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 var prop = expandoObject.StringProperty;
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
@@ -42,11 +41,11 @@ namespace Benchmark.System
         {
             var obj = new PropertyClass();
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 obj.StringProperty = "";
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
@@ -54,11 +53,11 @@ namespace Benchmark.System
         {
             var obj = new PropertyClass();
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 var prop = obj.StringProperty;
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
@@ -66,11 +65,11 @@ namespace Benchmark.System
         {
             var obj = new Dictionary<string, object>();
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 obj["StringProperty"] = "";
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
@@ -79,11 +78,11 @@ namespace Benchmark.System
             var obj = new Dictionary<string, object>();
             obj["StringProperty"] = "";
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 var prop = obj["StringProperty"];
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         private class PropertyClass
@@ -91,5 +90,4 @@ namespace Benchmark.System
             public string StringProperty { get; set; }
         }
     }
-    // ReSharper restore InconsistentNaming
 }

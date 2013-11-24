@@ -1,48 +1,47 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Diagnostics;
 using System.Globalization;
-using NUnit.Framework;
 
 namespace Benchmark.System
 {
-    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class StringTests
     {
-        const int iterations = 10000000;
-        const int iterations2 = 1000000;
+        const int IterationsShort = 10000000;
+        const int IterationsLong = 1000000;
 
         [Test]
         public void IsNullOrEmpty_Null()
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < IterationsShort; i++)
             {
                 String.IsNullOrEmpty(null);
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(IterationsShort);
         }
 
         [Test]
         public void IsNullOrEmpty_Empty()
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < IterationsShort; i++)
             {
                 String.IsNullOrEmpty("");
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(IterationsShort);
         }
 
         [Test]
         public void IsNullOrEmpty_String()
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < IterationsShort; i++)
             {
                 String.IsNullOrEmpty("test");
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(IterationsShort);
         }
 
         [TestCase(null)]
@@ -51,11 +50,11 @@ namespace Benchmark.System
         public void Equals_Null(string str)
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < IterationsShort; i++)
             {
                 var b = (str == null);
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(IterationsShort);
         }
 
         [TestCase(null)]
@@ -64,11 +63,11 @@ namespace Benchmark.System
         public void Equals_Empty(string str)
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < IterationsShort; i++)
             {
                 var b = (str == "");
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(IterationsShort);
         }
 
         [TestCase(null)]
@@ -77,11 +76,11 @@ namespace Benchmark.System
         public void Equals_String(string str)
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < IterationsShort; i++)
             {
                 var b = (str == "test");
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(IterationsShort);
         }
 
         [TestCase(0)]
@@ -89,11 +88,11 @@ namespace Benchmark.System
         public void ToString_Decimal(decimal num)
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations2; i++)
+            for (var i = 0; i < IterationsLong; i++)
             {
                 var str = num.ToString();
             }
-            stopwatch.StopAndLog(iterations2);
+            stopwatch.StopAndLog(IterationsLong);
         }
 
         [TestCase(0)]
@@ -101,11 +100,11 @@ namespace Benchmark.System
         public void ToString_Decimal_InvariantCulture(decimal num)
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations2; i++)
+            for (var i = 0; i < IterationsLong; i++)
             {
                 var str = num.ToString(CultureInfo.InvariantCulture);
             }
-            stopwatch.StopAndLog(iterations2);
+            stopwatch.StopAndLog(IterationsLong);
         }
 
         [TestCase(0)]
@@ -113,11 +112,11 @@ namespace Benchmark.System
         public void ToString_Double(double num)
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations2; i++)
+            for (var i = 0; i < IterationsLong; i++)
             {
                 var str = num.ToString();
             }
-            stopwatch.StopAndLog(iterations2);
+            stopwatch.StopAndLog(IterationsLong);
         }
 
         [TestCase(0)]
@@ -125,12 +124,11 @@ namespace Benchmark.System
         public void ToString_Double_InvariantCulture(double num)
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations2; i++)
+            for (var i = 0; i < IterationsLong; i++)
             {
                 var str = num.ToString(CultureInfo.InvariantCulture);
             }
-            stopwatch.StopAndLog(iterations2);
+            stopwatch.StopAndLog(IterationsLong);
         }
     }
-    // ReSharper restore InconsistentNaming
 }

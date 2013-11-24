@@ -1,17 +1,16 @@
-﻿using System.Collections.Concurrent;
+﻿using NUnit.Framework;
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using NUnit.Framework;
 
 namespace Benchmark.System.Collections
 {
-    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class ConcurrentStackTests
     {
-        const int iterations = 1000000;
+        const int Iterations = 1000000;
 
         [TestCase(1, 1)]
         [TestCase(2, 1)]
@@ -28,7 +27,7 @@ namespace Benchmark.System.Collections
             var stop = false;
             var producerTasks = Enumerable.Range(0, producerThreads).Select(i => Task.Factory.StartNew(() =>
                 {
-                    var count = iterations/producerThreads;
+                    var count = Iterations/producerThreads;
                     startEvent.Wait();
                     for (var j = 0; j < count; j++)
                         stack.Push(0);
@@ -47,8 +46,7 @@ namespace Benchmark.System.Collections
             stop = true;
             Task.WaitAll(producerTasks);
             Task.WaitAll(consumerTasks);
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
     }
-    // ReSharper restore InconsistentNaming
 }

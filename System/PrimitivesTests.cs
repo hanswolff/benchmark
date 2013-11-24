@@ -4,11 +4,10 @@ using System.Diagnostics;
 
 namespace Benchmark.System
 {
-    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class PrimitivesTests
     {
-        const int iterations = 10000000;
+        const int Iterations = 10000000;
 
         [Test]
         public void Int16_Addition()
@@ -16,11 +15,11 @@ namespace Benchmark.System
             var num = (short)0;
 
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 num += 1;
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
 
             if (num == 0) NeverCalled();
         }
@@ -31,11 +30,11 @@ namespace Benchmark.System
             var num = (short)0;
 
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 num *= 3;
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
 
             if (num == 0) NeverCalled();
         }
@@ -46,11 +45,11 @@ namespace Benchmark.System
             var num = (short)0;
 
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 num *= 3;
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
 
             if (num == 0) NeverCalled();
         }
@@ -61,11 +60,11 @@ namespace Benchmark.System
             var num = 0;
 
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 num += 1;
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
 
             if (num == 0) NeverCalled();
         }
@@ -76,11 +75,11 @@ namespace Benchmark.System
             var num = 0;
 
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 num *= 3;
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
 
             if (num == 0) NeverCalled();
         }
@@ -91,12 +90,12 @@ namespace Benchmark.System
             var num = 0;
 
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 num *= 3;
             }
 
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
 
             if (num == 0) NeverCalled();
         }
@@ -107,11 +106,11 @@ namespace Benchmark.System
             long num = 0;
 
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 num += 1;
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
 
             if (num == 0) NeverCalled();
         }
@@ -122,11 +121,11 @@ namespace Benchmark.System
             long num = 0;
 
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 num *= 3;
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
 
             if (num == 0) NeverCalled();
         }
@@ -137,11 +136,11 @@ namespace Benchmark.System
             long num = 0;
 
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 num *= 3;
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
 
             if (num == 0) NeverCalled();
         }
@@ -151,5 +150,4 @@ namespace Benchmark.System
             Console.WriteLine("Force optimization to ignore loop content");
         }
     }
-    // ReSharper restore InconsistentNaming
 }

@@ -1,25 +1,24 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Diagnostics;
 using System.Globalization;
-using NUnit.Framework;
 
 namespace Benchmark.System
 {
-    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class ConvertTests
     {
-        const int iterations = 1000000;
+        const int Iterations = 1000000;
 
         [Test]
         public void Double_ConvertToDouble_StringZero()
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 var num = Convert.ToDouble("0");
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
@@ -28,11 +27,11 @@ namespace Benchmark.System
             var str = Math.PI.ToString();
 
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 var num = Convert.ToDouble(str);
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
@@ -41,22 +40,22 @@ namespace Benchmark.System
             var str = Math.PI.ToString();
 
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 var num = Double.Parse(str);
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
         public void Decimal_DecimalToDouble_StringZero()
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 var num = Convert.ToDecimal("0");
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
@@ -65,11 +64,11 @@ namespace Benchmark.System
             var str = Math.PI.ToString();
 
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 var num = Convert.ToDecimal(str);
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
@@ -78,11 +77,11 @@ namespace Benchmark.System
             var str = Math.PI.ToString();
 
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 var num = Decimal.Parse(str);
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
@@ -91,12 +90,11 @@ namespace Benchmark.System
             const decimal num = (decimal) Math.PI;
 
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 var str = num.ToString(CultureInfo.InvariantCulture).Replace(".", "");
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
     }
-    // ReSharper restore InconsistentNaming
 }

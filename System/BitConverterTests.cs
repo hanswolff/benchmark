@@ -1,47 +1,45 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Diagnostics;
-using NUnit.Framework;
 
 namespace Benchmark.System
 {
-    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class BitConverterTests
     {
-        const int iterations = 2000000;
+        const int Iterations = 2000000;
 
         [Test]
         public void GetBytes_ShortValue()
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 BitConverter.GetBytes((short)0);
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
         public void GetBytes_IntValue()
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 BitConverter.GetBytes(0);
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
         public void GetBytes_LongValue()
         {
             var stopwatch = Stopwatch.StartNew();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 BitConverter.GetBytes(0L);
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
     }
-    // ReSharper restore InconsistentNaming
 }

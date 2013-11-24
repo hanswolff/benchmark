@@ -1,26 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using NUnit.Framework;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using NUnit.Framework;
 
 namespace Benchmark.System.Collections
 {
-    // ReSharper disable InconsistentNaming
     [TestFixture]
     public class HashSetTests
     {
-        const int iterations = 2000000;
+        const int Iterations = 2000000;
 
         [Test]
         public void Add_Int32()
         {
             var stopwatch = Stopwatch.StartNew();
             var hashSet = new HashSet<int>();
-            for (var i = 0; i < iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 hashSet.Add(i);
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
@@ -28,56 +27,55 @@ namespace Benchmark.System.Collections
         {
             var stopwatch = Stopwatch.StartNew();
             var hashSet = new HashSet<long>();
-            for (long i = 0; i < iterations; i++)
+            for (long i = 0; i < Iterations; i++)
             {
                 hashSet.Add(i);
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
         public void ForEach_Int32()
         {
-            var list = new HashSet<int>(Enumerable.Range(0, iterations));
+            var list = new HashSet<int>(Enumerable.Range(0, Iterations));
 
             var stopwatch = Stopwatch.StartNew();
             foreach (var item in list)
             {
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
         public void ForEach_Int64()
         {
-            var list = new HashSet<long>(Enumerable.Range(0, iterations).Select(x => (long)x));
+            var list = new HashSet<long>(Enumerable.Range(0, Iterations).Select(x => (long)x));
 
             var stopwatch = Stopwatch.StartNew();
             foreach (var item in list)
             {
             }
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
         public void RemoveLast_Int32()
         {
-            var list = new HashSet<int>(Enumerable.Range(0, iterations));
+            var list = new HashSet<int>(Enumerable.Range(0, Iterations));
 
             var stopwatch = Stopwatch.StartNew();
             while (list.Count > 0) list.Remove(list.Count - 1);
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
         public void RemoveLast_Int64()
         {
-            var list = new HashSet<long>(Enumerable.Range(0, iterations).Select(x => (long)x));
+            var list = new HashSet<long>(Enumerable.Range(0, Iterations).Select(x => (long)x));
 
             var stopwatch = Stopwatch.StartNew();
             while (list.Count > 0) list.Remove(list.Count - 1);
-            stopwatch.StopAndLog(iterations);
+            stopwatch.StopAndLog(Iterations);
         }
     }
-    // ReSharper restore InconsistentNaming
 }
