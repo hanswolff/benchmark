@@ -21,7 +21,7 @@ namespace Benchmark.System.Collections
         [TestCase(4, 4)]
         public void PushTryPop(int producerThreads, int consumerThreads)
         {
-            var stack = new ConcurrentQueue<int>();
+            var queue = new ConcurrentQueue<int>();
             var startEvent = new ManualResetEventSlim(false);
             var finished = 0;
             var stop = false;
@@ -30,7 +30,7 @@ namespace Benchmark.System.Collections
                     var count = Iterations/producerThreads;
                     startEvent.Wait();
                     for (var j = 0; j < count; j++)
-                        stack.Enqueue(0);
+                        queue.Enqueue(0);
                     Interlocked.Increment(ref finished);
                     if (finished >= producerThreads) stop = true;
                 }, TaskCreationOptions.LongRunning)).ToArray();
@@ -38,7 +38,7 @@ namespace Benchmark.System.Collections
                 {
                     int num;
                     startEvent.Wait();
-                    while (!stop) stack.TryDequeue(out num);
+                    while (!stop) queue.TryDequeue(out num);
                 }, TaskCreationOptions.LongRunning)).ToArray();
 
             var stopwatch = Stopwatch.StartNew();
