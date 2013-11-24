@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Benchmark.System.Collections
 {
     [TestFixture]
-    public class ConcurrentStackTests
+    public class ConcurrentBagTests
     {
         const int Iterations = 1000000;
 
@@ -21,7 +21,7 @@ namespace Benchmark.System.Collections
         [TestCase(4, 4)]
         public void PushTryPop(int producerThreads, int consumerThreads)
         {
-            var queue = new ConcurrentStack<int>();
+            var bag = new ConcurrentBag<int>();
             var startEvent = new ManualResetEventSlim(false);
             var finished = 0;
             var stop = false;
@@ -30,7 +30,7 @@ namespace Benchmark.System.Collections
                     var count = Iterations/producerThreads;
                     startEvent.Wait();
                     for (var j = 0; j < count; j++)
-                        queue.Push(0);
+                        bag.Add(0);
                     Interlocked.Increment(ref finished);
                     if (finished >= producerThreads) stop = true;
                 }, TaskCreationOptions.LongRunning)).ToArray();
@@ -38,7 +38,7 @@ namespace Benchmark.System.Collections
                 {
                     int num;
                     startEvent.Wait();
-                    while (!stop) queue.TryPop(out num);
+                    while (!stop) bag.TryTake(out num);
                 }, TaskCreationOptions.LongRunning)).ToArray();
 
             var stopwatch = Stopwatch.StartNew();
