@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BenchmarkHelpers.cs" />
+    <Compile Include="System.Collections\ConcurrentQueueTests.cs" />
     <Compile Include="System.Collections\ConcurrentStackTests.cs" />
     <Compile Include="System.Collections\BlockingCollectionTests.cs" />
     <Compile Include="System.Collections\HashSetTests.cs" />
