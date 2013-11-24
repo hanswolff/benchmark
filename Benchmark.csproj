@@ -53,6 +53,7 @@
     <Compile Include="System.IO\MemoryMappedFilesTests.cs" />
     <Compile Include="System.Linq\LinqTests.cs" />
     <Compile Include="System.Linq\ParallelTests.cs" />
+    <Compile Include="System.Threading\ManualResetEventTests.cs" />
     <Compile Include="System.Threading\MutexTests.cs" />
     <Compile Include="System.Threading\ThreadTests.cs" />
     <Compile Include="System.Threading\TaskTests.cs" />
