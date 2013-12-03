@@ -24,5 +24,21 @@ namespace Benchmark.System.Threading
             }
             stopwatch.StopAndLog(Iterations);
         }
+
+        [Test]
+        public void WaitRelease()
+        {
+            var name = Guid.NewGuid().ToString();
+            using (var mutex = new Mutex(true, name))
+            {
+                var stopwatch = Stopwatch.StartNew();
+                for (var i = 0; i < Iterations; i++)
+                {
+                    mutex.WaitOne();
+                    mutex.ReleaseMutex();
+                }
+                stopwatch.StopAndLog(Iterations);
+            }
+        }
     }
 }
