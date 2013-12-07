@@ -237,5 +237,46 @@ namespace Benchmark.System.Collections
             } while (count > 0);
             stopwatch.StopAndLog(Iterations);
         }
+
+        [Test]
+        public void Set_Key_Int32()
+        {
+            var hashtable = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => x));
+
+            var stopwatch = Stopwatch.StartNew();
+            for (var i = 0; i < Iterations; i++)
+            {
+                hashtable[i] = i;
+            }
+            stopwatch.StopAndLog(Iterations);
+        }
+
+        [Test]
+        public void Set_Key_Int64()
+        {
+            var hashtable = new Hashtable(Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x));
+
+            var stopwatch = Stopwatch.StartNew();
+            for (long i = 0; i < Iterations; i++)
+            {
+                hashtable[i] = i;
+            }
+            stopwatch.StopAndLog(Iterations);
+        }
+
+        [Test]
+        public void Set_Key_String()
+        {
+            var keys = Enumerable.Range(0, Iterations).Select(x => x.ToString()).ToArray();
+            var hashtable = new Hashtable(keys.ToDictionary(x => x, null));
+
+            var stopwatch = Stopwatch.StartNew();
+            for (var i = 0; i < Iterations; i++)
+            {
+                var key = keys[i];
+                hashtable[key] = key;
+            }
+            stopwatch.StopAndLog(Iterations);
+        }
     }
 }
