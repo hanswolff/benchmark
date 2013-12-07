@@ -8,16 +8,16 @@ namespace Benchmark.System.Collections
     [TestFixture]
     public class HashtableTests
     {
-        const int Iterations = 2000000;
+        const int Iterations = 1000000;
 
         [Test]
         public void Add_Key_Int32()
         {
             var stopwatch = Stopwatch.StartNew();
-            var hashSet = new Hashtable();
+            var hashtable = new Hashtable();
             for (var i = 0; i < Iterations; i++)
             {
-                hashSet.Add(i, null);
+                hashtable.Add(i, null);
             }
             stopwatch.StopAndLog(Iterations);
         }
@@ -26,10 +26,62 @@ namespace Benchmark.System.Collections
         public void Add_Key_Int64()
         {
             var stopwatch = Stopwatch.StartNew();
-            var hashSet = new Hashtable();
+            var hashtable = new Hashtable();
             for (long i = 0; i < Iterations; i++)
             {
-                hashSet.Add(i, null);
+                hashtable.Add(i, null);
+            }
+            stopwatch.StopAndLog(Iterations);
+        }
+
+        [Test]
+        public void ContainsKey_KeyDoesntExist_Int32()
+        {
+            var hashtable = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => x, null));
+
+            var stopwatch = Stopwatch.StartNew();
+            for (var i = -1; i >= -Iterations; i--)
+            {
+                hashtable.ContainsKey(-1);
+            }
+            stopwatch.StopAndLog(Iterations);
+        }
+
+        [Test]
+        public void ContainsKey_KeyDoesntExist_Int64()
+        {
+            var hashtable = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => (long)x, null));
+
+            var stopwatch = Stopwatch.StartNew();
+            for (long i = -1; i >= -Iterations; i--)
+            {
+                hashtable.ContainsKey(-1);
+            }
+            stopwatch.StopAndLog(Iterations);
+        }
+
+        [Test]
+        public void ContainsKey_KeyExists_Int32()
+        {
+            var hashtable = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => x, null));
+
+            var stopwatch = Stopwatch.StartNew();
+            for (var i = 0; i < Iterations; i++)
+            {
+                hashtable.ContainsKey(i);
+            }
+            stopwatch.StopAndLog(Iterations);
+        }
+
+        [Test]
+        public void ContainsKey_KeyExists_Int64()
+        {
+            var hashtable = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => (long)x, null));
+
+            var stopwatch = Stopwatch.StartNew();
+            for (long i = 0; i < Iterations; i++)
+            {
+                hashtable.ContainsKey(i);
             }
             stopwatch.StopAndLog(Iterations);
         }
@@ -37,10 +89,10 @@ namespace Benchmark.System.Collections
         [Test]
         public void ForEach_Key_Int32()
         {
-            var list = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => x, null));
+            var hashtable = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => x, null));
 
             var stopwatch = Stopwatch.StartNew();
-            foreach (var item in list)
+            foreach (var item in hashtable)
             {
             }
             stopwatch.StopAndLog(Iterations);
@@ -49,10 +101,10 @@ namespace Benchmark.System.Collections
         [Test]
         public void ForEach_Key_Int64()
         {
-            var list = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => x, null));
+            var hashtable = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => (long)x, null));
 
             var stopwatch = Stopwatch.StartNew();
-            foreach (var item in list)
+            foreach (var item in hashtable)
             {
             }
             stopwatch.StopAndLog(Iterations);
@@ -71,11 +123,12 @@ namespace Benchmark.System.Collections
         [Test]
         public void RemoveLast_Key_Int64()
         {
-            var list = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => x, null));
+            var hashtable = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => (long)x, null));
 
             var stopwatch = Stopwatch.StartNew();
-            while (list.Count > 0) list.Remove(list.Count - 1);
+            while (hashtable.Count > 0) hashtable.Remove((long)hashtable.Count - 1);
             stopwatch.StopAndLog(Iterations);
         }
+
     }
 }

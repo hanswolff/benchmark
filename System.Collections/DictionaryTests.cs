@@ -14,10 +14,10 @@ namespace Benchmark.System.Collections
         public void Add_Key_Int32()
         {
             var stopwatch = Stopwatch.StartNew();
-            var hashSet = new Dictionary<int, object>();
+            var dictionary = new Dictionary<int, object>();
             for (var i = 0; i < Iterations; i++)
             {
-                hashSet.Add(i, null);
+                dictionary.Add(i, null);
             }
             stopwatch.StopAndLog(Iterations);
         }
@@ -26,10 +26,62 @@ namespace Benchmark.System.Collections
         public void Add_Key_Int64()
         {
             var stopwatch = Stopwatch.StartNew();
-            var hashSet = new Dictionary<long, object>();
+            var dictionary = new Dictionary<long, object>();
             for (long i = 0; i < Iterations; i++)
             {
-                hashSet.Add(i, null);
+                dictionary.Add(i, null);
+            }
+            stopwatch.StopAndLog(Iterations);
+        }
+
+        [Test]
+        public void ContainsKey_KeyDoesntExist_Int32()
+        {
+            var dictionary = Enumerable.Range(0, Iterations).ToDictionary(x => x, null);
+
+            var stopwatch = Stopwatch.StartNew();
+            for (var i = -1; i >= -Iterations; i--)
+            {
+                dictionary.ContainsKey(-1);
+            }
+            stopwatch.StopAndLog(Iterations);
+        }
+
+        [Test]
+        public void ContainsKey_KeyDoesntExist_Int64()
+        {
+            var dictionary = Enumerable.Range(0, Iterations).ToDictionary(x => (long)x, null);
+
+            var stopwatch = Stopwatch.StartNew();
+            for (long i = -1; i >= -Iterations; i--)
+            {
+                dictionary.ContainsKey(-1);
+            }
+            stopwatch.StopAndLog(Iterations);
+        }
+
+        [Test]
+        public void ContainsKey_KeyExists_Int32()
+        {
+            var dictionary = Enumerable.Range(0, Iterations).ToDictionary(x => x, null);
+
+            var stopwatch = Stopwatch.StartNew();
+            for (var i = 0; i < Iterations; i++)
+            {
+                dictionary.ContainsKey(i);
+            }
+            stopwatch.StopAndLog(Iterations);
+        }
+
+        [Test]
+        public void ContainsKey_KeyExists_Int64()
+        {
+            var dictionary = Enumerable.Range(0, Iterations).ToDictionary(x => (long)x, null);
+
+            var stopwatch = Stopwatch.StartNew();
+            for (long i = 0; i < Iterations; i++)
+            {
+                dictionary.ContainsKey(i);
             }
             stopwatch.StopAndLog(Iterations);
         }
@@ -37,10 +89,10 @@ namespace Benchmark.System.Collections
         [Test]
         public void ForEach_Key_Int32()
         {
-            var list = Enumerable.Range(0, Iterations).ToDictionary(x => x, null);
+            var dictionary = Enumerable.Range(0, Iterations).ToDictionary(x => x, null);
 
             var stopwatch = Stopwatch.StartNew();
-            foreach (var item in list)
+            foreach (var item in dictionary)
             {
             }
             stopwatch.StopAndLog(Iterations);
@@ -49,10 +101,10 @@ namespace Benchmark.System.Collections
         [Test]
         public void ForEach_Key_Int64()
         {
-            var list = Enumerable.Range(0, Iterations).ToDictionary(x => (long)x, null);
+            var dictionary = Enumerable.Range(0, Iterations).ToDictionary(x => (long)x, null);
 
             var stopwatch = Stopwatch.StartNew();
-            foreach (var item in list)
+            foreach (var item in dictionary)
             {
             }
             stopwatch.StopAndLog(Iterations);
@@ -61,20 +113,20 @@ namespace Benchmark.System.Collections
         [Test]
         public void RemoveLast_Key_Int32()
         {
-            var list = Enumerable.Range(0, Iterations).ToDictionary(x => x, null);
+            var dictionary = Enumerable.Range(0, Iterations).ToDictionary(x => x, null);
 
             var stopwatch = Stopwatch.StartNew();
-            while (list.Count > 0) list.Remove(list.Count - 1);
+            while (dictionary.Count > 0) dictionary.Remove(dictionary.Count - 1);
             stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
         public void RemoveLast_Key_Int64()
         {
-            var list = Enumerable.Range(0, Iterations).ToDictionary(x => (long)x, null);
+            var dictionary = Enumerable.Range(0, Iterations).ToDictionary(x => (long)x, null);
 
             var stopwatch = Stopwatch.StartNew();
-            while (list.Count > 0) list.Remove(list.Count - 1);
+            while (dictionary.Count > 0) dictionary.Remove((long)dictionary.Count - 1);
             stopwatch.StopAndLog(Iterations);
         }
     }
