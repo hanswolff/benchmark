@@ -205,10 +205,13 @@ namespace Benchmark.System.Collections
         [Test]
         public void RemoveLast_Key_Int32()
         {
-            var list = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => x));
+            var hashtable = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
-            while (list.Count > 0) list.Remove(list.Count - 1);
+            for (var i = Iterations - 1; i >= 0; i--)
+            {
+                hashtable.Remove(i);
+            }
             stopwatch.StopAndLog(Iterations);
         }
 
@@ -218,7 +221,10 @@ namespace Benchmark.System.Collections
             var hashtable = new Hashtable(Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
-            while (hashtable.Count > 0) hashtable.Remove((long)hashtable.Count - 1);
+            for (long i = Iterations - 1; i >= 0; i--)
+            {
+                hashtable.Remove(i);
+            }
             stopwatch.StopAndLog(Iterations);
         }
 
@@ -228,13 +234,11 @@ namespace Benchmark.System.Collections
             var keys = Enumerable.Range(0, Iterations).Select(x => x.ToString()).ToArray();
             var hashtable = new Hashtable(keys.ToDictionary(x => x, null));
 
-            var count = hashtable.Count;
             var stopwatch = Stopwatch.StartNew();
-            do
+            for (var i = Iterations - 1; i >= 0; i--)
             {
-                hashtable.Remove(keys[count - 1]);
-                count = hashtable.Count;
-            } while (count > 0);
+                hashtable.Remove(keys[i]);
+            }
             stopwatch.StopAndLog(Iterations);
         }
 

@@ -208,7 +208,10 @@ namespace Benchmark.System.Collections
             var dictionary = Enumerable.Range(0, Iterations).ToDictionary(x => x);
 
             var stopwatch = Stopwatch.StartNew();
-            while (dictionary.Count > 0) dictionary.Remove(dictionary.Count - 1);
+            for (var i = Iterations - 1; i >= 0; i--)
+            {
+                dictionary.Remove(i);
+            }
             stopwatch.StopAndLog(Iterations);
         }
 
@@ -218,7 +221,10 @@ namespace Benchmark.System.Collections
             var dictionary = Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x);
 
             var stopwatch = Stopwatch.StartNew();
-            while (dictionary.Count > 0) dictionary.Remove((long)dictionary.Count - 1);
+            for (long i = Iterations - 1; i >= 0; i--)
+            {
+                dictionary.Remove(i);
+            }
             stopwatch.StopAndLog(Iterations);
         }
 
@@ -228,13 +234,11 @@ namespace Benchmark.System.Collections
             var keys = Enumerable.Range(0, Iterations).Select(x => x.ToString()).ToArray();
             var dictionary = keys.ToDictionary(x => x, null);
 
-            var count = dictionary.Count;
             var stopwatch = Stopwatch.StartNew();
-            do
+            for (var i = Iterations - 1; i >= 0; i--)
             {
-                dictionary.Remove(keys[count - 1]);
-                count = dictionary.Count;
-            } while (count > 0);
+                dictionary.Remove(keys[i]);
+            }
             stopwatch.StopAndLog(Iterations);
         }
 

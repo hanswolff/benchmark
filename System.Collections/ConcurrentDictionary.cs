@@ -8,7 +8,7 @@ namespace Benchmark.System.Collections
     [TestFixture]
     public class ConcurrentDictionaryTests
     {
-        const int Iterations = 2000000;
+        const int Iterations = 1000000;
 
         [Test]
         public void Add_Key_Int32()
@@ -208,8 +208,11 @@ namespace Benchmark.System.Collections
             var dictionary = new ConcurrentDictionary<int, int>(Enumerable.Range(0, Iterations).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
-            int oldValue;
-            while (dictionary.Count > 0) dictionary.TryRemove(dictionary.Count - 1, out oldValue);
+            for (var i = Iterations - 1; i >= 0; i--)
+            {
+                int oldValue;
+                dictionary.TryRemove(i, out oldValue);
+            }
             stopwatch.StopAndLog(Iterations);
         }
 
@@ -219,8 +222,11 @@ namespace Benchmark.System.Collections
             var dictionary = new ConcurrentDictionary<long, long>(Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
-            long oldValue;
-            while (dictionary.Count > 0) dictionary.TryRemove((long)dictionary.Count - 1, out oldValue);
+            for (long i = Iterations - 1; i >= 0; i--)
+            {
+                long oldValue;
+                dictionary.TryRemove(i, out oldValue);
+            }
             stopwatch.StopAndLog(Iterations);
         }
 
@@ -230,14 +236,12 @@ namespace Benchmark.System.Collections
             var keys = Enumerable.Range(0, Iterations).Select(x => x.ToString()).ToArray();
             var dictionary = new ConcurrentDictionary<string, string>(keys.ToDictionary(x => x, null));
 
-            var count = dictionary.Count;
             var stopwatch = Stopwatch.StartNew();
-            do
+            for (var i = Iterations - 1; i >= 0; i--)
             {
                 string oldValue;
-                dictionary.TryRemove(keys[count - 1], out oldValue);
-                count = dictionary.Count;
-            } while (count > 0);
+                dictionary.TryRemove(keys[i], out oldValue);
+            }
             stopwatch.StopAndLog(Iterations);
         }
 
