@@ -64,7 +64,7 @@ namespace Benchmark.System.Collections
         [Test]
         public void ContainsKey_KeyDoesntExist_Int64()
         {
-            var hashtable = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => (long)x));
+            var hashtable = new Hashtable(Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
             for (long i = -1; i >= -Iterations; i--)
@@ -103,7 +103,7 @@ namespace Benchmark.System.Collections
         [Test]
         public void ContainsKey_KeyExists_Int64()
         {
-            var hashtable = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => (long)x));
+            var hashtable = new Hashtable(Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
             for (long i = 0; i < Iterations; i++)
@@ -181,7 +181,7 @@ namespace Benchmark.System.Collections
         [Test]
         public void ForEach_Key_Int64()
         {
-            var hashtable = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => (long)x));
+            var hashtable = new Hashtable(Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
             foreach (var item in hashtable)
@@ -215,7 +215,7 @@ namespace Benchmark.System.Collections
         [Test]
         public void RemoveLast_Key_Int64()
         {
-            var hashtable = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => (long)x));
+            var hashtable = new Hashtable(Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
             while (hashtable.Count > 0) hashtable.Remove((long)hashtable.Count - 1);

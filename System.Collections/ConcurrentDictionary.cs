@@ -1,12 +1,12 @@
 ﻿using NUnit.Framework;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Linq;
 
 namespace Benchmark.System.Collections
 {
     [TestFixture]
-    public class DictionaryTests
+    public class ConcurrentDictionaryTests
     {
         const int Iterations = 2000000;
 
@@ -14,10 +14,10 @@ namespace Benchmark.System.Collections
         public void Add_Key_Int32()
         {
             var stopwatch = Stopwatch.StartNew();
-            var dictionary = new Dictionary<int, object>();
+            var dictionary = new ConcurrentDictionary<int, object>();
             for (var i = 0; i < Iterations; i++)
             {
-                dictionary.Add(i, null);
+                dictionary.TryAdd(i, null);
             }
             stopwatch.StopAndLog(Iterations);
         }
@@ -26,10 +26,10 @@ namespace Benchmark.System.Collections
         public void Add_Key_Int64()
         {
             var stopwatch = Stopwatch.StartNew();
-            var dictionary = new Dictionary<long, object>();
+            var dictionary = new ConcurrentDictionary<long, object>();
             for (long i = 0; i < Iterations; i++)
             {
-                dictionary.Add(i, null);
+                dictionary.TryAdd(i, null);
             }
             stopwatch.StopAndLog(Iterations);
         }
@@ -40,10 +40,10 @@ namespace Benchmark.System.Collections
             var keys = Enumerable.Range(0, Iterations).Select(x => x.ToString()).ToArray();
 
             var stopwatch = Stopwatch.StartNew();
-            var dictionary = new Dictionary<string, object>();
+            var dictionary = new ConcurrentDictionary<string, object>();
             for (long i = 0; i < Iterations; i++)
             {
-                dictionary.Add(keys[i], null);
+                dictionary.TryAdd(keys[i], null);
             }
             stopwatch.StopAndLog(Iterations);
         }
@@ -51,7 +51,7 @@ namespace Benchmark.System.Collections
         [Test]
         public void ContainsKey_KeyDoesntExist_Int32()
         {
-            var dictionary = Enumerable.Range(0, Iterations).ToDictionary(x => x);
+            var dictionary = new ConcurrentDictionary<int, int>(Enumerable.Range(0, Iterations).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
             for (var i = -1; i >= -Iterations; i--)
@@ -64,7 +64,7 @@ namespace Benchmark.System.Collections
         [Test]
         public void ContainsKey_KeyDoesntExist_Int64()
         {
-            var dictionary = Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x);
+            var dictionary = new ConcurrentDictionary<long, long>(Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
             for (long i = -1; i >= -Iterations; i--)
@@ -77,7 +77,7 @@ namespace Benchmark.System.Collections
         [Test]
         public void ContainsKey_KeyDoesntExist_String()
         {
-            var dictionary = Enumerable.Range(0, Iterations).Select(x => x.ToString()).ToDictionary(x => x);
+            var dictionary = new ConcurrentDictionary<string, string>(Enumerable.Range(0, Iterations).Select(x => x.ToString()).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
             for (long i = 0; i < Iterations; i++)
@@ -90,7 +90,7 @@ namespace Benchmark.System.Collections
         [Test]
         public void ContainsKey_KeyExists_Int32()
         {
-            var dictionary = Enumerable.Range(0, Iterations).ToDictionary(x => x);
+            var dictionary = new ConcurrentDictionary<int, int>(Enumerable.Range(0, Iterations).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
             for (var i = 0; i < Iterations; i++)
@@ -103,7 +103,7 @@ namespace Benchmark.System.Collections
         [Test]
         public void ContainsKey_KeyExists_Int64()
         {
-            var dictionary = Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x);
+            var dictionary = new ConcurrentDictionary<long, long>(Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
             for (long i = 0; i < Iterations; i++)
@@ -116,7 +116,7 @@ namespace Benchmark.System.Collections
         [Test]
         public void ContainsKey_KeyExists_String()
         {
-            var dictionary = Enumerable.Range(0, Iterations).ToDictionary(x => x.ToString());
+            var dictionary = new ConcurrentDictionary<string, string>(Enumerable.Range(0, Iterations).Select(x => x.ToString()).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
             for (long i = 0; i < Iterations; i++)
@@ -129,7 +129,7 @@ namespace Benchmark.System.Collections
         [Test]
         public void Get_Key_Int32()
         {
-            var dictionary = Enumerable.Range(0, Iterations).ToDictionary(x => x);
+            var dictionary = new ConcurrentDictionary<int, int>(Enumerable.Range(0, Iterations).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
             for (var i = 0; i < Iterations; i++)
@@ -142,7 +142,7 @@ namespace Benchmark.System.Collections
         [Test]
         public void Get_Key_Int64()
         {
-            var dictionary = Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x);
+            var dictionary = new ConcurrentDictionary<long, long>(Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
             for (long i = 0; i < Iterations; i++)
@@ -156,7 +156,7 @@ namespace Benchmark.System.Collections
         public void Get_Key_String()
         {
             var keys = Enumerable.Range(0, Iterations).Select(x => x.ToString()).ToArray();
-            var dictionary = keys.ToDictionary(x => x, null);
+            var dictionary = new ConcurrentDictionary<string, string>(keys.ToDictionary(x => x, null));
 
             var stopwatch = Stopwatch.StartNew();
             for (var i = 0; i < Iterations; i++)
@@ -169,7 +169,7 @@ namespace Benchmark.System.Collections
         [Test]
         public void ForEach_Key_Int32()
         {
-            var dictionary = Enumerable.Range(0, Iterations).ToDictionary(x => x);
+            var dictionary = new ConcurrentDictionary<int, int>(Enumerable.Range(0, Iterations).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
             foreach (var item in dictionary)
@@ -181,7 +181,7 @@ namespace Benchmark.System.Collections
         [Test]
         public void ForEach_Key_Int64()
         {
-            var dictionary = Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x);
+            var dictionary = new ConcurrentDictionary<long, long>(Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
             foreach (var item in dictionary)
@@ -193,7 +193,7 @@ namespace Benchmark.System.Collections
         [Test]
         public void ForEach_Key_String()
         {
-            var dictionary = Enumerable.Range(0, Iterations).ToDictionary(x => x.ToString());
+            var dictionary = new ConcurrentDictionary<string, string>(Enumerable.Range(0, Iterations).Select(x => x.ToString()).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
             foreach (var item in dictionary)
@@ -205,20 +205,22 @@ namespace Benchmark.System.Collections
         [Test]
         public void RemoveLast_Key_Int32()
         {
-            var dictionary = Enumerable.Range(0, Iterations).ToDictionary(x => x);
+            var dictionary = new ConcurrentDictionary<int, int>(Enumerable.Range(0, Iterations).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
-            while (dictionary.Count > 0) dictionary.Remove(dictionary.Count - 1);
+            int oldValue;
+            while (dictionary.Count > 0) dictionary.TryRemove(dictionary.Count - 1, out oldValue);
             stopwatch.StopAndLog(Iterations);
         }
 
         [Test]
         public void RemoveLast_Key_Int64()
         {
-            var dictionary = Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x);
+            var dictionary = new ConcurrentDictionary<long, long>(Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
-            while (dictionary.Count > 0) dictionary.Remove((long)dictionary.Count - 1);
+            long oldValue;
+            while (dictionary.Count > 0) dictionary.TryRemove((long)dictionary.Count - 1, out oldValue);
             stopwatch.StopAndLog(Iterations);
         }
 
@@ -226,13 +228,14 @@ namespace Benchmark.System.Collections
         public void RemoveLast_Key_String()
         {
             var keys = Enumerable.Range(0, Iterations).Select(x => x.ToString()).ToArray();
-            var dictionary = keys.ToDictionary(x => x, null);
+            var dictionary = new ConcurrentDictionary<string, string>(keys.ToDictionary(x => x, null));
 
             var count = dictionary.Count;
             var stopwatch = Stopwatch.StartNew();
             do
             {
-                dictionary.Remove(keys[count - 1]);
+                string oldValue;
+                dictionary.TryRemove(keys[count - 1], out oldValue);
                 count = dictionary.Count;
             } while (count > 0);
             stopwatch.StopAndLog(Iterations);
@@ -241,7 +244,7 @@ namespace Benchmark.System.Collections
         [Test]
         public void Set_Key_Int32()
         {
-            var dictionary = Enumerable.Range(0, Iterations).ToDictionary(x => x);
+            var dictionary = new ConcurrentDictionary<int, int>(Enumerable.Range(0, Iterations).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
             for (var i = 0; i < Iterations; i++)
@@ -254,7 +257,7 @@ namespace Benchmark.System.Collections
         [Test]
         public void Set_Key_Int64()
         {
-            var dictionary = Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x);
+            var dictionary = new ConcurrentDictionary<long, long>(Enumerable.Range(0, Iterations).Select(x => (long)x).ToDictionary(x => x));
 
             var stopwatch = Stopwatch.StartNew();
             for (long i = 0; i < Iterations; i++)
@@ -268,7 +271,7 @@ namespace Benchmark.System.Collections
         public void Set_Key_String()
         {
             var keys = Enumerable.Range(0, Iterations).Select(x => x.ToString()).ToArray();
-            var dictionary = keys.ToDictionary(x => x, null);
+            var dictionary = new ConcurrentDictionary<string, string>(keys.ToDictionary(x => x, null));
 
             var stopwatch = Stopwatch.StartNew();
             for (var i = 0; i < Iterations; i++)
