@@ -5,8 +5,7 @@ using NUnit.Framework;
 
 namespace Benchmark.System.Threading
 {
-    [TestFixture]
-    public class TaskTests
+    class TaskTests : BenchmarkFixture
     {
         const int Iterations = 5000;
 

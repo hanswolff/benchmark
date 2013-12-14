@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Benchmark.System.Collections
 {
-    [TestFixture]
-    public class ConcurrentBagTests
+    class ConcurrentBagTests : BenchmarkFixture
     {
         const int Iterations = 1000000;
 

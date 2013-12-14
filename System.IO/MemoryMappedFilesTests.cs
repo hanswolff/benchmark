@@ -4,8 +4,7 @@ using System.IO.MemoryMappedFiles;
 
 namespace Benchmark.System.IO
 {
-    [TestFixture]
-    public class MemoryMappedFilesTests
+    class MemoryMappedFilesTests : BenchmarkFixture
     {
         const int Iterations = 20000;
 

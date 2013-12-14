@@ -5,8 +5,7 @@ using System.Threading;
 
 namespace Benchmark.System.Threading
 {
-    [TestFixture]
-    public class MutexTests
+    class MutexTests : BenchmarkFixture
     {
         const int Iterations = 100000;
 

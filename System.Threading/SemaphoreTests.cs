@@ -4,8 +4,7 @@ using System.Threading;
 
 namespace Benchmark.System.Threading
 {
-    [TestFixture]
-    public class SemaphoreTests
+    class SemaphoreTests : BenchmarkFixture
     {
         const int Iterations = 100000;
 

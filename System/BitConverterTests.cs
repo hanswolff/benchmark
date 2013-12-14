@@ -4,8 +4,7 @@ using System.Diagnostics;
 
 namespace Benchmark.System
 {
-    [TestFixture]
-    public class BitConverterTests
+    class BitConverterTests : BenchmarkFixture
     {
         const int Iterations = 2000000;
 

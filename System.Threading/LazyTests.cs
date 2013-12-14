@@ -5,8 +5,7 @@ using System.Diagnostics;
 
 namespace Benchmark.System.Threading
 {
-    [TestFixture]
-    public class LazyTests
+    class LazyTests : BenchmarkFixture
     {
         const int Iterations = 1000000;
 

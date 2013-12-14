@@ -4,8 +4,7 @@ using System.Threading;
 
 namespace Benchmark.System.Threading
 {
-    [TestFixture]
-    public class ThreadTests
+    class ThreadTests : BenchmarkFixture
     {
         const int Iterations = 1000;
 

@@ -5,8 +5,7 @@ using System.Globalization;
 
 namespace Benchmark.System
 {
-    [TestFixture]
-    public class ConvertTests
+    class ConvertTests : BenchmarkFixture
     {
         const int Iterations = 1000000;
 

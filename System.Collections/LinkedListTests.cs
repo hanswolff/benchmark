@@ -5,8 +5,7 @@ using System.Linq;
 
 namespace Benchmark.System.Collections
 {
-    [TestFixture]
-    public class LinkedListTests
+    class LinkedListTests : BenchmarkFixture
     {
         const int Iterations = 2000000;
 

@@ -5,8 +5,7 @@ using System.Linq;
 
 namespace Benchmark.System.Collections
 {
-    [TestFixture]
-    public class ConcurrentDictionaryTests
+    class ConcurrentDictionaryTests : BenchmarkFixture
     {
         const int Iterations = 1000000;
 

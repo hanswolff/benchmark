@@ -5,8 +5,7 @@ using System.IO;
 
 namespace Benchmark.System.IO
 {
-    [TestFixture]
-    public class BinaryReaderTests
+    class BinaryReaderTests : BenchmarkFixture
     {
         const int Iterations = 2000000;
 

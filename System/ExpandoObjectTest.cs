@@ -5,8 +5,7 @@ using System.Dynamic;
 
 namespace Benchmark.System
 {
-    [TestFixture]
-    public class ExpandoObjectTests
+    class ExpandoObjectTests : BenchmarkFixture
     {
         const int Iterations = 1000000;
 

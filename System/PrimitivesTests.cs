@@ -4,8 +4,7 @@ using System.Diagnostics;
 
 namespace Benchmark.System
 {
-    [TestFixture]
-    public class PrimitivesTests
+    class PrimitivesTests : BenchmarkFixture
     {
         const int Iterations = 10000000;
 

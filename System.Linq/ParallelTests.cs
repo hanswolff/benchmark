@@ -4,8 +4,7 @@ using System.Linq;
 
 namespace Benchmark.System.Linq
 {
-    [TestFixture]
-    public class ParallelTests
+    class ParallelTests : BenchmarkFixture
     {
         const int Iterations = 2000000;
 

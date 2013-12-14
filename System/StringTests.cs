@@ -5,8 +5,7 @@ using System.Globalization;
 
 namespace Benchmark.System
 {
-    [TestFixture]
-    public class StringTests
+    class StringTests : BenchmarkFixture
     {
         const int IterationsShort = 10000000;
         const int IterationsLong = 1000000;

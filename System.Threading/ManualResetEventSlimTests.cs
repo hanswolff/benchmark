@@ -4,8 +4,7 @@ using System.Threading;
 
 namespace Benchmark.System.Threading
 {
-    [TestFixture]
-    public class ManualResetEventSlimTests
+    class ManualResetEventSlimTests : BenchmarkFixture
     {
         const int Iterations = 1000000;
 
