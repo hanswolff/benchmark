@@ -8,9 +8,10 @@ namespace Benchmark
         public static void StopAndLog(this Stopwatch stopwatch, long iterations)
         {
             stopwatch.Stop();
-            Assert.Inconclusive("{0} ms --- {1:N0} operations/sec --- {2} precision timer", 
-                stopwatch.ElapsedMilliseconds, 
-                1000 * iterations / (stopwatch.ElapsedMilliseconds + 0.0000001),
+            var seconds = stopwatch.ElapsedTicks / (decimal)Stopwatch.Frequency;
+            Assert.Inconclusive("{0:N2} ms --- {1:N0} operations/sec --- {2} precision timer",
+                seconds * 1000m, 
+                iterations / (seconds + 0.0000001m),
                 Stopwatch.IsHighResolution ? "high" : "low");
         }
     }
