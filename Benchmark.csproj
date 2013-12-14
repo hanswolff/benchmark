@@ -63,6 +63,7 @@
     <Compile Include="System.Threading\SemaphoreSlimTests.cs" />
     <Compile Include="System.Threading\SemaphoreTests.cs" />
     <Compile Include="System.Threading\MutexTests.cs" />
+    <Compile Include="System.Threading\LazyTests.cs" />
     <Compile Include="System.Threading\ThreadTests.cs" />
     <Compile Include="System.Threading\TaskTests.cs" />
     <Compile Include="System\ConvertTests.cs" />
