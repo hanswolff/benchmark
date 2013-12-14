@@ -34,6 +34,20 @@ namespace Benchmark.System.Collections
         }
 
         [Test]
+        public void Add_String()
+        {
+            var keys = Enumerable.Range(0, Iterations).Select(x => x.ToString()).ToArray();
+
+            var stopwatch = Stopwatch.StartNew();
+            var hashtable = new HashSet<string>();
+            for (var i = 0; i < Iterations; i++)
+            {
+                hashtable.Add(keys[i]);
+            }
+            stopwatch.StopAndLog(Iterations);
+        }
+
+        [Test]
         public void ForEach_Int32()
         {
             var enumerator = new HashSet<int>(Enumerable.Range(0, Iterations)).GetEnumerator();
@@ -47,6 +61,16 @@ namespace Benchmark.System.Collections
         public void ForEach_Int64()
         {
             var enumerator = new HashSet<long>(Enumerable.Range(0, Iterations).Select(x => (long)x)).GetEnumerator();
+
+            var stopwatch = Stopwatch.StartNew();
+            while (enumerator.MoveNext()) { }
+            stopwatch.StopAndLog(Iterations);
+        }
+
+        [Test]
+        public void ForEach_String()
+        {
+            var enumerator = new HashSet<string>(Enumerable.Range(0, Iterations).Select(x => x.ToString())).GetEnumerator();
 
             var stopwatch = Stopwatch.StartNew();
             while (enumerator.MoveNext()) { }
@@ -70,6 +94,20 @@ namespace Benchmark.System.Collections
 
             var stopwatch = Stopwatch.StartNew();
             while (hashSet.Count > 0) hashSet.Remove(hashSet.Count - 1);
+            stopwatch.StopAndLog(Iterations);
+        }
+
+        [Test]
+        public void RemoveLast_String()
+        {
+            var keys = Enumerable.Range(0, Iterations).Select(x => x.ToString()).ToArray();
+            var hashSet = new HashSet<string>(keys);
+
+            var stopwatch = Stopwatch.StartNew();
+            for (var i = Iterations - 1; i >= 0; i--)
+            {
+                hashSet.Remove(keys[i]);
+            }
             stopwatch.StopAndLog(Iterations);
         }
     }

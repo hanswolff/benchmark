@@ -40,7 +40,7 @@ namespace Benchmark.System.Collections
 
             var stopwatch = Stopwatch.StartNew();
             var hashtable = new Hashtable();
-            for (long i = 0; i < Iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 hashtable.Add(keys[i], null);
             }
@@ -79,7 +79,7 @@ namespace Benchmark.System.Collections
             var hashtable = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => x.ToString()));
 
             var stopwatch = Stopwatch.StartNew();
-            for (long i = 0; i < Iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 hashtable.ContainsKey("");
             }
@@ -118,7 +118,7 @@ namespace Benchmark.System.Collections
             var hashtable = new Hashtable(Enumerable.Range(0, Iterations).ToDictionary(x => x.ToString()));
 
             var stopwatch = Stopwatch.StartNew();
-            for (long i = 0; i < Iterations; i++)
+            for (var i = 0; i < Iterations; i++)
             {
                 hashtable.ContainsKey("0");
             }
