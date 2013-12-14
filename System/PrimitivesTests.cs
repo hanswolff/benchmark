@@ -145,9 +145,24 @@ namespace Benchmark.System
             if (num == 0) NeverCalled();
         }
 
+        [Test]
+        public void Guid_NewGuid()
+        {
+            var guid = Guid.NewGuid();
+
+            var stopwatch = Stopwatch.StartNew();
+            for (var i = 0; i < Iterations; i++)
+            {
+                guid = Guid.NewGuid();
+            }
+            stopwatch.StopAndLog(Iterations);
+
+            if (guid == Guid.Empty) NeverCalled();
+        }
+
         private static void NeverCalled()
         {
-            Console.WriteLine("Force optimization to ignore loop content");
+            Console.WriteLine("Optimization must keep loop content");
         }
     }
 }
