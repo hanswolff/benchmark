@@ -24,9 +24,6 @@ namespace Benchmark.System.Threading
         [Test]
         public void Lazy_Value_Initialized()
         {
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-
             var array = Enumerable.Range(0, Iterations).Select(i => new Lazy<int>(() => i)).ToArray();
             foreach (var lazy in array)
             {
@@ -90,7 +87,24 @@ namespace Benchmark.System.Threading
         }
 
         [Test]
-        public void IsValueCreated()
+        public void IsValueCreated_Initialized()
+        {
+            var array = Enumerable.Range(0, Iterations).Select(i => new Lazy<int>(() => i)).ToArray();
+            foreach (var lazy in array)
+            {
+                var dummy = lazy.Value;
+            }
+
+            var stopwatch = Stopwatch.StartNew();
+            for (var i = 0; i < Iterations; i++)
+            {
+                var b = array[i].IsValueCreated;
+            }
+            stopwatch.StopAndLog(Iterations);
+        }
+
+        [Test]
+        public void IsValueCreated_NotInitialized()
         {
             var array = Enumerable.Range(0, Iterations).Select(i => new Lazy<int>(() => i)).ToArray();
 
