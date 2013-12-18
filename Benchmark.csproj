@@ -61,6 +61,7 @@
     <Compile Include="System.Linq\ParallelTests.cs" />
     <Compile Include="System.Threading\ManualResetEventSlimTests.cs" />
     <Compile Include="System.Threading\ManualResetEventTests.cs" />
+    <Compile Include="System.Threading\MonitorTests.cs" />
     <Compile Include="System.Threading\SemaphoreSlimTests.cs" />
     <Compile Include="System.Threading\SemaphoreTests.cs" />
     <Compile Include="System.Threading\MutexTests.cs" />
